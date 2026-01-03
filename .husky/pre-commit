@@ -5,7 +5,7 @@
  php ./vendor/bin/phpstan
 
  if [ $? -ne 0 ]; then
-    
+
     echo "opa! Deu ruim aqui com PHPSTAN. Arrume antes de continuar...";
 
     exit 1;
@@ -17,7 +17,7 @@ fi;
 php artisan test
 
  if [ $? -ne 0 ]; then
-    
+
     echo "opa! Deu ruim aqui com algum teste. Arrume antes de continuar...";
 
     exit 1;
@@ -37,7 +37,7 @@ for FILE in $STAGED_FILES
 do
 
     php ./vendor/bin/pint "${FILE}";
-    
+
     git add "${FILE}";
 
 done;

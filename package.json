@@ -4,6 +4,7 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
+        "prepare": "husky",
         "dev": "vite"
     },
     "devDependencies": {
