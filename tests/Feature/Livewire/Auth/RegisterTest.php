@@ -26,3 +26,11 @@ it('should be able to register a new user in the system', function () {
     assertDatabaseCount('users', 1);
 
 });
+
+test('required field', function ($fields) {
+
+    Livewire::test(Register::class, [$fields => ''])
+        ->call('submit')
+        ->assertHasErrors([$fields => 'required']);
+
+})->with(['name', 'email', 'password']);

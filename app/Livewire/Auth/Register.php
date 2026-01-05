@@ -3,17 +3,21 @@
 namespace App\Livewire\Auth;
 
 use App\Models\User;
+use Livewire\Attributes\Rule;
 use Livewire\Component;
 
 class Register extends Component
 {
-    public ?string $name;
+    #[Rule(['required'])]
+    public ?string $name = null;
 
-    public ?string $email;
+    #[Rule(['required'])]
+    public ?string $email = null;
 
-    public ?string $email_confirmation;
+    public ?string $email_confirmation = null;
 
-    public ?string $password;
+    #[Rule(['required'])]
+    public ?string $password = null;
 
     public function render()
     {
@@ -22,6 +26,8 @@ class Register extends Component
 
     public function submit()
     {
+
+        $this->validate();
 
         User::query()->create([
             'name' => $this->name,
