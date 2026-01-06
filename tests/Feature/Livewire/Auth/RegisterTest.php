@@ -27,10 +27,40 @@ it('should be able to register a new user in the system', function () {
 
 });
 
+test('validate fields', function ($data) {
+
+    Livewire::test(Register::class, [$data->field => $data->value])
+        ->call('submit')
+        ->assertHasErrors([$data->field => $data->rule]);
+
+})->with([
+    'name::required' => (object) ['field' => 'name', 'value' => '', 'rule' => 'required'],
+    'name::max:255' => (object) ['field' => 'name', 'value' => str_repeat('*', 256), 'rule' => 'max'],
+
+    'password::required' => (object) ['field' => 'password', 'value' => '', 'rule' => 'required'],
+    'password::max:255' => (object) ['field' => 'password', 'value' => str_repeat('*', 256), 'rule' => 'max'],
+
+    'email::required' => (object) ['field' => 'email', 'value' => '', 'rule' => 'required'],
+    'email::max:255' => (object) ['field' => 'email', 'value' => str_repeat('*'.'@doe.com', 256), 'rule' => 'max'],
+    'email::email' => (object) ['field' => 'email', 'value' => 'its_not_email', 'rule' => 'email'],
+    'email::confirmed' => (object) ['field' => 'email', 'value' => 'test@gmail.com', 'rule' => 'confirmed'],
+
+]);
+
+/*
 test('required field', function ($fields) {
 
     Livewire::test(Register::class, [$fields => ''])
         ->call('submit')
         ->assertHasErrors([$fields => 'required']);
 
-})->with(['name', 'email', 'password']);
+})->with(['name', 'email', 'password'])->todo();
+
+
+test('max character', function ($fields) {
+
+    Livewire::test(Register::class, [$fields => str_repeat('*', 256) ])
+        ->call('submit')
+        ->assertHasErrors([$fields => 'max']);
+
+})->with(['name', 'email', 'password'])->todo(); */

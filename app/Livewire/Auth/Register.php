@@ -8,15 +8,15 @@ use Livewire\Component;
 
 class Register extends Component
 {
-    #[Rule(['required'])]
+    #[Rule(['required', 'max:255'])]
     public ?string $name = null;
 
-    #[Rule(['required'])]
+    #[Rule(['required', 'email', 'max:255', 'confirmed'])]
     public ?string $email = null;
 
     public ?string $email_confirmation = null;
 
-    #[Rule(['required'])]
+    #[Rule(['required', 'max:255'])]
     public ?string $password = null;
 
     public function render()
